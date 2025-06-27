@@ -60,7 +60,6 @@ function onSorteioFinalizado(segment) {
 
   console.log(`🧪 Número sorteado: ${numero}`);
 
-  // 🎆 Disparar fogos sempre
   const duration = 3000;
   const end = Date.now() + duration;
 
@@ -81,7 +80,11 @@ function onSorteioFinalizado(segment) {
     });
   }, 200);
 
- 
+  // ✅  Tocar som de palmas
+  const somPalmas = document.getElementById('somPalmas');
+  somPalmas.currentTime = 0; // reinicia caso já esteja tocando
+  somPalmas.play();
 
   document.querySelector('.btn').disabled = false;
 }
+
