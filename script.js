@@ -1,6 +1,7 @@
 const infos = {
   2: "Parabéns Ratão, ganhou 50 reaus!!!",
-  14: "Parabéns Lagartixa, ganhou 50 pratas!!!"
+  14: "Parabéns Lagartixa, ganhou 50 pratas!!!",
+  19: "Parabéns Pokemon, ganhou um vale-ROBUX"
 };
 
 const roda = new Winwheel({
@@ -28,6 +29,26 @@ function girarRoda() {
   roda.rotationAngle = 0;
   roda.draw();
   roda.startAnimation();
+}
+ // Função para adicionar um novo segmento em posição aleatória
+function adicionarSegmento() {
+  const input = document.getElementById('inputTexto');
+  const texto = input.value.trim();
+  if (texto === '') return;
+
+  const novaCor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+  const posicaoAleatoria = Math.floor(Math.random() * roda.segments.length) + 1;
+
+  roda.addSegment({
+    fillStyle: novaCor,
+    text: texto
+  }, posicaoAleatoria);
+
+  roda.draw();
+
+  // ✅ Limpar input e dar foco de novo
+  input.value = '';
+  input.focus();
 }
 
 function onSorteioFinalizado(segment) {
@@ -59,6 +80,8 @@ function onSorteioFinalizado(segment) {
       }
     });
   }, 200);
+
+ 
 
   document.querySelector('.btn').disabled = false;
 }

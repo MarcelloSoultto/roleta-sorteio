@@ -1,5 +1,8 @@
 body {
-  background-color: rgb(241, 196, 196);
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHWSNUSftO0eSOcQwN_C15E4QraahfZi5Qgj3vkmXqIDJjXcLrPrGFfnWEJ9Ek066XiSM&usqp=CAU');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   text-align: center;
   font-weight: bold;
   font-family: 'Lucida Sans', sans-serif;
@@ -43,6 +46,54 @@ h1 {
   border-radius: 8px;
 }
 
-.btn:hover {
+.btn:hover{
   background-color: #0f75d3;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  gap: 10px;
+}
+
+.input-premio {
+  width: 90%;
+  max-width: 300px;
+  height: 45px;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.input-container button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 90%;
+  max-width: 200px;
+}
+
+.input-container button:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 480px) {
+  .input-premio {
+    font-size: 18px;
+    height: 50px;
+  }
+
+  .input-container button {
+    font-size: 18px;
+    padding: 14px;
+  }
 }
