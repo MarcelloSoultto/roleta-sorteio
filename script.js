@@ -30,13 +30,14 @@ function girarRoda() {
   roda.draw();
   roda.startAnimation();
 }
- // Função para adicionar um novo segmento em posição aleatória
+
+// Função para adicionar um novo segmento em posição aleatória
 function adicionarSegmento() {
   const input = document.getElementById('inputTexto');
   const texto = input.value.trim();
-  if (texto === '') return;
+  if (!texto) return;
 
-  const novaCor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+  const novaCor = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
   const posicaoAleatoria = Math.floor(Math.random() * roda.segments.length) + 1;
 
   roda.addSegment({
@@ -44,21 +45,23 @@ function adicionarSegmento() {
     text: texto
   }, posicaoAleatoria);
 
+  // Adiciona mensagem padrão para o novo segmento
+  infos[texto] = `Parabéns! Você ganhou: ${texto}`;
+
   roda.draw();
 
-  // ✅ Limpar input e dar foco de novo
   input.value = '';
   input.focus();
 }
 
 function onSorteioFinalizado(segment) {
-  const numero = parseInt(segment.text);
-  const mensagem = infos[numero] || 'Sem informações adicionais.';
+  const texto = segment.text;
+  const mensagem = infos[texto] || infos[parseInt(texto)] || 'Sem informações adicionais.';
 
-  document.getElementById('resultado').innerHTML = `<h2>Número sorteado: ${numero}</h2>`;
+  document.getElementById('resultado').innerHTML = `<h2>Prêmio sorteado: ${texto}</h2>`;
   document.getElementById('info').innerText = mensagem;
 
-  console.log(`🧪 Número sorteado: ${numero}`);
+  console.log(`🧪 Prêmio sorteado: ${texto}`);
 
   const duration = 3000;
   const end = Date.now() + duration;
@@ -80,11 +83,10 @@ function onSorteioFinalizado(segment) {
     });
   }, 200);
 
-  // ✅  Tocar som de palmas
+  // Tocar som de palmas
   const somPalmas = document.getElementById('somPalmas');
-  somPalmas.currentTime = 0; // reinicia caso já esteja tocando
+  somPalmas.currentTime = 0;
   somPalmas.play();
 
   document.querySelector('.btn').disabled = false;
 }
-
